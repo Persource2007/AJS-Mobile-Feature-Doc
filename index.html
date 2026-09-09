@@ -1273,22 +1273,35 @@
           </div>
 
           <!-- ---------- DEEP DIVES ---------- -->
-          <h3 class="h3 mt-7">Deep dives</h3>
-          <p class="text-caption">Three flows that carry enough states to be worth their own diagram. Open one at a
-            time.</p>
+          <div class="deepdive-card">
+            <div class="deepdive-card__head">
+              <h3 class="deepdive-card__title">Deep dives</h3>
+              <p class="deepdive-card__subtitle">Three flows that carry enough states to be worth their own diagram. Open one at a time.</p>
+            </div>
 
-          <div class="accordion mt-5">
+            <div class="deepdive-list">
 
-            <div class="accordion-group" id="flow-task-lifecycle"
-              style="--tag-color:var(--area-4);--tag-soft:var(--area-4-soft)">
-              <button class="accordion-group__header" data-accordion-trigger aria-expanded="false">
-                <div class="accordion-group__title"><span class="accordion-group__letter">1</span><span
-                    class="accordion-group__name">Task lifecycle — every state a task can reach</span><span
-                    class="accordion-group__count">15 states</span></div>
-                <svg class="accordion-group__chev" aria-hidden="true" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" />
-                </svg>
-              </button>
+              <div class="accordion-group deepdive-item" id="flow-task-lifecycle">
+                <button class="deepdive-header" data-accordion-trigger aria-expanded="false">
+                  <div class="deepdive-squircle deepdive-squircle--task" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <line x1="9" y1="12" x2="15" y2="12"/>
+                      <line x1="9" y1="15" x2="15" y2="15"/>
+                      <line x1="9" y1="18" x2="13" y2="18"/>
+                    </svg>
+                  </div>
+                  <div class="deepdive-header__title-wrap">
+                    <h4 class="deepdive-header__title">Task lifecycle — every state a task can reach</h4>
+                  </div>
+                  <div class="deepdive-header__meta">
+                    <span class="deepdive-header__count">15 states</span>
+                    <svg class="deepdive-header__chev" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
               <div class="accordion-group__panel">
                 <div class="accordion-group__panel-inner">
                   <div class="fdeep">
@@ -1365,16 +1378,25 @@
               </div>
             </div>
 
-            <div class="accordion-group" id="flow-certificate-lifecycle"
-              style="--tag-color:var(--area-9);--tag-soft:var(--area-9-soft)">
-              <button class="accordion-group__header" data-accordion-trigger aria-expanded="false">
-                <div class="accordion-group__title"><span class="accordion-group__letter">2</span><span
-                    class="accordion-group__name">Certificate lifecycle — device states vs back-office
-                    states</span><span class="accordion-group__count">8 states</span></div>
-                <svg class="accordion-group__chev" aria-hidden="true" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" />
-                </svg>
-              </button>
+              <div class="accordion-group deepdive-item" id="flow-certificate-lifecycle">
+                <button class="deepdive-header" data-accordion-trigger aria-expanded="false">
+                  <div class="deepdive-squircle deepdive-squircle--cert" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      <path d="M12 18c3-2 5-4.5 5-7V6.5L12 4.5 7 6.5V11c0 2.5 2 5 5 7z" stroke-width="1.3" stroke-dasharray="2 1.5"/>
+                      <path d="m9.5 12 1.8 1.8 3.7-3.7"/>
+                    </svg>
+                  </div>
+                  <div class="deepdive-header__title-wrap">
+                    <h4 class="deepdive-header__title">Certificate lifecycle — device states vs back-office states</h4>
+                  </div>
+                  <div class="deepdive-header__meta">
+                    <span class="deepdive-header__count">8 states</span>
+                    <svg class="deepdive-header__chev" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
               <div class="accordion-group__panel">
                 <div class="accordion-group__panel-inner">
                   <div class="fdeep">
@@ -1436,16 +1458,25 @@
               </div>
             </div>
 
-            <div class="accordion-group" id="flow-offline-sync"
-              style="--tag-color:var(--area-15);--tag-soft:var(--area-15-soft)">
-              <button class="accordion-group__header" data-accordion-trigger aria-expanded="false">
-                <div class="accordion-group__title"><span class="accordion-group__letter">3</span><span
-                    class="accordion-group__name">Offline capture and synchronisation</span><span
-                    class="accordion-group__count">2 queues</span></div>
-                <svg class="accordion-group__chev" aria-hidden="true" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" />
-                </svg>
-              </button>
+              <div class="accordion-group deepdive-item" id="flow-offline-sync">
+                <button class="deepdive-header" data-accordion-trigger aria-expanded="false">
+                  <div class="deepdive-squircle deepdive-squircle--sync" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="5" rx="8" ry="3"/>
+                      <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/>
+                      <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
+                    </svg>
+                  </div>
+                  <div class="deepdive-header__title-wrap">
+                    <h4 class="deepdive-header__title">Offline capture and synchronisation</h4>
+                  </div>
+                  <div class="deepdive-header__meta">
+                    <span class="deepdive-header__count">2 queues</span>
+                    <svg class="deepdive-header__chev" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </button>
               <div class="accordion-group__panel">
                 <div class="accordion-group__panel-inner">
                   <div class="fdeep">
@@ -1504,8 +1535,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+              </div>
 
+            </div>
           </div>
         </section>
 
