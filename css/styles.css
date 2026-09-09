@@ -4864,6 +4864,272 @@ a.fnode:hover::after {
     max-width: 100% !important;
   }
 }
+/* ---------- Deep dives (Premium Icon List Accordion Cards) ---------- */
+.deepdive-card {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+  padding: 26px 28px 28px;
+  margin-top: var(--sp-7);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+
+.deepdive-card__head {
+  margin-bottom: 20px;
+}
+
+.deepdive-card__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.01em;
+}
+
+.deepdive-card__subtitle {
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.deepdive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.deepdive-item {
+  border: 1px solid var(--color-border) !important;
+  border-radius: 14px !important;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+}
+
+.deepdive-item:hover {
+  border-color: var(--color-border-strong) !important;
+  box-shadow: var(--shadow-2);
+}
+
+.deepdive-item.is-open {
+  border-color: var(--color-border-strong) !important;
+  box-shadow: var(--shadow-2);
+}
+
+.deepdive-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.deepdive-header:hover {
+  background: var(--color-surface-sunken);
+}
+
+.deepdive-item.is-open .deepdive-header {
+  background: var(--color-surface-sunken);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Color-Themed Icon Squircles */
+.deepdive-squircle {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  flex-shrink: 0;
+}
+
+.deepdive-header:hover .deepdive-squircle,
+.deepdive-squircle:hover {
+  transform: scale(1.06);
+}
+
+/* 1. Task lifecycle squircle */
+.deepdive-squircle--task {
+  background: linear-gradient(135deg, #FDF2F8, #FCE7F3);
+  border: 1px solid #FBCFE8;
+  color: #C026D3;
+  box-shadow: 0 4px 14px rgba(192, 38, 211, 0.15);
+}
+
+:root[data-theme="dark"] .deepdive-squircle--task {
+  background: linear-gradient(135deg, rgba(217, 70, 239, 0.16), rgba(217, 70, 239, 0.08));
+  border: 1px solid rgba(217, 70, 239, 0.35);
+  color: #F0ABFC;
+  box-shadow: 0 4px 16px rgba(217, 70, 239, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .deepdive-squircle--task {
+    background: linear-gradient(135deg, rgba(217, 70, 239, 0.16), rgba(217, 70, 239, 0.08));
+    border: 1px solid rgba(217, 70, 239, 0.35);
+    color: #F0ABFC;
+    box-shadow: 0 4px 16px rgba(217, 70, 239, 0.25);
+  }
+}
+
+/* 2. Certificate lifecycle squircle */
+.deepdive-squircle--cert {
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  border: 1px solid #BFDBFE;
+  color: #2563EB;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+}
+
+:root[data-theme="dark"] .deepdive-squircle--cert {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(37, 99, 235, 0.08));
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  color: #60A5FA;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .deepdive-squircle--cert {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(37, 99, 235, 0.08));
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    color: #60A5FA;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+  }
+}
+
+/* 3. Offline capture & sync squircle */
+.deepdive-squircle--sync {
+  background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+  border: 1px solid #A7F3D0;
+  color: #059669;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.15);
+}
+
+:root[data-theme="dark"] .deepdive-squircle--sync {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(16, 185, 129, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .deepdive-squircle--sync {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(16, 185, 129, 0.08));
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34D399;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+  }
+}
+
+/* Title & Description */
+.deepdive-header__title-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.deepdive-header__title {
+  font-family: var(--font-ui);
+  font-size: 15.5px;
+  font-weight: 650;
+  color: var(--color-text-primary);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Meta: Count badge & Chevron */
+.deepdive-header__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.deepdive-header__count {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.deepdive-header__chev {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  color: var(--color-text-tertiary);
+  transition: transform var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.deepdive-header:hover .deepdive-header__chev {
+  color: var(--color-text-primary);
+}
+
+.deepdive-item.is-open .deepdive-header__chev {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+.deepdive-item .accordion-group__panel-inner {
+  padding: 22px 24px 26px;
+  background: var(--color-surface-sunken);
+}
+
+/* Responsive */
+@media (max-width: 639px) {
+  .deepdive-card {
+    padding: 18px 16px 20px;
+    border-radius: 14px;
+  }
+
+  .deepdive-header {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .deepdive-squircle {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 12px;
+  }
+
+  .deepdive-squircle svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .deepdive-header__title {
+    font-size: 14px;
+  }
+
+  .deepdive-header__meta {
+    gap: 8px;
+  }
+
+  .deepdive-header__count {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
 /* deep-dive canvases (inside existing accordion) */
 .fdeep {
   display: flex;
