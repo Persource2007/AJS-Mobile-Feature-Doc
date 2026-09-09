@@ -369,11 +369,13 @@
 
     initFeatureCards() {
       document.querySelectorAll('.feature-card').forEach((card) => {
-        const head = card.querySelector('.feature-card__head');
-        if (!head || head.querySelector('.card-copy-btn')) return;
+        if (card.querySelector('.card-copy-btn')) return;
 
-        const id = card.querySelector('.feature-card__id')?.textContent.trim() || card.id || 'Feature';
-        const btn = this.createBtn('Copy', `Copy ${id} details to clipboard`);
+        const idRow = card.querySelector('.feature-card__id-row');
+        const idEl = card.querySelector('.feature-card__id');
+        const rawId = idEl?.textContent.trim() || card.id || 'Feature';
+        const cleanId = rawId.replace(/^#/, '');
+        const btn = this.createBtn('Copy', `Copy ${cleanId} details to clipboard`);
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const title = card.querySelector('h3')?.textContent.trim() || '';
@@ -391,12 +393,19 @@
             }
           }
 
-          const copyText = `[${id}] ${title}${tag ? ' (' + tag + ')' : ''}\nPurpose: ${purpose}${detailsText}`;
-          Clipboard.copy(copyText, `Copied ${id} details to clipboard`);
+          const copyText = `[${cleanId}] ${title}${tag ? ' (' + tag + ')' : ''}\nPurpose: ${purpose}${detailsText}`;
+          Clipboard.copy(copyText, `Copied ${cleanId} details to clipboard`);
           this.setCopiedState(btn);
         });
 
-        head.appendChild(btn);
+        if (idRow) {
+          idRow.appendChild(btn);
+        } else if (idEl) {
+          idEl.after(btn);
+        } else {
+          const head = card.querySelector('.feature-card__head');
+          if (head) head.appendChild(btn);
+        }
       });
     },
 
