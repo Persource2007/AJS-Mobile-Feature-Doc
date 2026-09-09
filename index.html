@@ -211,7 +211,7 @@
             <li><a class="sidebar__sub-link" href="#notif-compliance">Compliance &amp; Safety Alerts</a></li>
             <li><a class="sidebar__sub-link" href="#notif-refusals">Refusals &amp; Blocks Table</a></li>
             <li><a class="sidebar__sub-link" href="#notif-validation">Validation Feedback Methods</a></li>
-            <li><a class="sidebar__sub-link" href="#notif-statuses">Task Status Colour Indicators</a></li>
+            <li><a class="sidebar__sub-link" href="#notif-statuses">Task Status Indicators</a></li>
             <li><a class="sidebar__sub-link" href="#notif-banner">Top Banner Alerts</a></li>
           </ul>
         </li>
@@ -5675,59 +5675,196 @@
               scrolled into view and flashed.</div>
           </div>
 
-          <h3 class="h3 mt-6" id="notif-statuses">Task status indicators</h3>
-          <p class="text-caption">Hex values are the exact colours defined in the application's own colour palette,
-            shown here for reference.</p>
-          <div class="status-strip">
-            <div class="status-chip-card" style="border-top:3px solid #20388A">
-              <div class="status-chip-card__title">On Route / Arrived / Started</div>
-              <div class="status-chip-card__trigger">Blue, animated</div>
-              <div class="status-chip-card__hex">dark_blue #20388A · sky_blue #1DBADF</div>
+          <div class="task-status-panel">
+            <div class="task-status-panel__head">
+              <h3 class="task-status-panel__title" id="notif-statuses">Task Status Indicators</h3>
+              <p class="task-status-panel__subtitle">Hex values are the exact colours defined in the application's own colour palette,<br>shown here for reference.</p>
             </div>
-            <div class="status-chip-card" style="border-top:3px solid #DB4437">
-              <div class="status-chip-card__title">Re-opened</div>
-              <div class="status-chip-card__trigger">Red, animated + reason</div>
-              <div class="status-chip-card__hex">red #DB4437</div>
+
+            <!-- Active Tasks Group -->
+            <div class="task-status-group">
+              <div class="task-status-group__head">
+                <h4 class="task-status-group__title">Active Tasks</h4>
+                <span class="task-status-group__badge">Live &amp; In-Progress</span>
+              </div>
+              <div class="task-status-grid task-status-grid--active">
+                <!-- 1. Open (No indicator) -->
+                <div class="task-status-ui-card" style="--card-color: var(--color-border)">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-secondary)" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 8v4l3 3" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Open</div>
+                  </div>
+                  <div class="task-status-ui-card__hex task-status-ui-card__hex--neutral">No Indicator</div>
+                </div>
+
+                <!-- 2. On Route / Arrived / Started (#20388A) -->
+                <div class="task-status-ui-card" style="--card-color: #20388a">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#20388A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="6" width="12" height="11" rx="1.5" />
+                        <path d="M14 9h4l3 3.5v4.5h-2" />
+                        <line x1="14" y1="12.5" x2="20" y2="12.5" />
+                        <circle cx="6.5" cy="18" r="2.2" />
+                        <circle cx="16.5" cy="18" r="2.2" />
+                        <line x1="8.7" y1="18" x2="14.3" y2="18" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">On Route / Arrived /<br>Started</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #20388a">#20388A</div>
+                </div>
+
+                <!-- 3. Re-Opened (#DB4437) -->
+                <div class="task-status-ui-card" style="--card-color: #db4437">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#DB4437" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12a9 9 0 0 1-15.36 6.36L3 16" />
+                        <path d="M3 21v-5h5" />
+                        <path d="M3 12a9 9 0 0 1 15.36-6.36L21 8" />
+                        <path d="M21 3v5h-5" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Re-Opened</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #db4437">#DB4437</div>
+                </div>
+              </div>
             </div>
-            <div class="status-chip-card" style="border-top:3px solid #34A953">
-              <div class="status-chip-card__title">Task Complete / Approved</div>
-              <div class="status-chip-card__trigger">Green banner</div>
-              <div class="status-chip-card__hex">green #34A953</div>
+
+            <!-- Completed Tasks Group -->
+            <div class="task-status-group">
+              <div class="task-status-group__head">
+                <h4 class="task-status-group__title">Completed Tasks</h4>
+                <span class="task-status-group__badge">Resolved &amp; History</span>
+              </div>
+              <div class="task-status-grid task-status-grid--completed">
+                <!-- 1. Abandoned (#980100) -->
+                <div class="task-status-ui-card" style="--card-color: #980100">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#980100" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Abandoned</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #980100">#980100</div>
+                </div>
+
+                <!-- 2. H&S Failed / Rejected / Cancelled (#DB4437) -->
+                <div class="task-status-ui-card" style="--card-color: #db4437">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#DB4437" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">H&amp;S Failed / Rejected /<br>Cancelled</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #db4437">#DB4437</div>
+                </div>
+
+                <!-- 3. Asbestos Failed (#9A65CA) -->
+                <div class="task-status-ui-card" style="--card-color: #9a65ca">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#9A65CA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13.5" />
+                        <circle cx="12" cy="17" r="0.8" fill="#9A65CA" stroke="none" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Asbestos Failed</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #9a65ca">#9A65CA</div>
+                </div>
+
+                <!-- 4. No Access (#CA9D06) -->
+                <div class="task-status-ui-card" style="--card-color: #ca9d06">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#CA9D06" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="5" y="11" width="14" height="10" rx="2.5" />
+                        <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                        <circle cx="12" cy="15" r="1.3" fill="#CA9D06" stroke="none" />
+                        <path d="M12 16.3v2" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">No Access</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #ca9d06">#CA9D06</div>
+                </div>
+
+                <!-- 5. Task Completed / Approved (#34A953) -->
+                <div class="task-status-ui-card" style="--card-color: #34a953">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#34A953" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="4.5 12.5 9.5 17.5 19.5 6.5" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Task Completed /<br>Approved</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #34a953">#34A953</div>
+                </div>
+
+                <!-- 6. Further Works Required (#46B2FF) -->
+                <div class="task-status-ui-card" style="--card-color: #46b2ff">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#46B2FF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Further Works<br>Required</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #46b2ff">#46B2FF</div>
+                </div>
+
+                <!-- 7. Materials Required (#3E5DE8) -->
+                <div class="task-status-ui-card" style="--card-color: #3e5de8">
+                  <div class="task-status-ui-card__body">
+                    <div class="task-status-ui-card__icon">
+                      <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="#3E5DE8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2.5l8 4.6v9.8l-8 4.6-8-4.6V7.1l8-4.6z" />
+                        <path d="M12 21.5V11.7" />
+                        <path d="M20 7.1l-8 4.6-8-4.6" />
+                      </svg>
+                    </div>
+                    <div class="task-status-ui-card__title">Materials Required</div>
+                  </div>
+                  <div class="task-status-ui-card__hex status-chip-card__hex" style="background: #3e5de8">#3E5DE8</div>
+                </div>
+              </div>
             </div>
-            <div class="status-chip-card" style="border-top:3px solid #CA9D06">
-              <div class="status-chip-card__title">No Access</div>
-              <div class="status-chip-card__trigger">Amber banner</div>
-              <div class="status-chip-card__hex">yellow #CA9D06</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #DB4437">
-              <div class="status-chip-card__title">H&amp;S Failed / Rejected / No Appointment</div>
-              <div class="status-chip-card__trigger">Red banner</div>
-              <div class="status-chip-card__hex">red #DB4437</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #980100">
-              <div class="status-chip-card__title">Abandoned</div>
-              <div class="status-chip-card__trigger">Dark red banner</div>
-              <div class="status-chip-card__hex">dark_red #980100</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #9A65CA">
-              <div class="status-chip-card__title">Asbestos Failed</div>
-              <div class="status-chip-card__trigger">Violet banner</div>
-              <div class="status-chip-card__hex">violet #9A65CA</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #46B2FF">
-              <div class="status-chip-card__title">Further Works Required</div>
-              <div class="status-chip-card__trigger">Blue banner</div>
-              <div class="status-chip-card__hex">blue #46B2FF</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #3E5DE8">
-              <div class="status-chip-card__title">Materials Required</div>
-              <div class="status-chip-card__trigger">Purple banner</div>
-              <div class="status-chip-card__hex">purple #3E5DE8</div>
-            </div>
-            <div class="status-chip-card" style="border-top:3px solid #DB4437">
-              <div class="status-chip-card__title">Cancelled</div>
-              <div class="status-chip-card__trigger">Red banner; all actions removed</div>
-              <div class="status-chip-card__hex">red #DB4437</div>
+
+            <div class="task-status-panel__note">Click any color code to copy.</div>
+          </div>
+
+          <div class="callout info mt-4" id="task-card-markers">
+            <span class="callout__icon"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.6" />
+                <path d="M10 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="10" cy="6.5" r="1" fill="currentColor" />
+              </svg></span>
+            <div>
+              <strong>Task Card Border Indicators &amp; Markers.</strong> Aside from status labels and outcome banners, cards display specialized visual indicators:
+              <ul class="bullet-list mt-2">
+                <li><strong>Open Task:</strong> Displays no status badge indicator on the task card; the primary action button shows "On Route".</li>
+                <li><strong>Appointment Task:</strong> Has no status text badge; marked exclusively by a solid vertical strip along the right end of the task card (<span class="status-chip-card__hex" style="background: #1dbadf; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer;">#1DBADF</span>).</li>
+                <li><strong>Emergency Task:</strong> Marked by the same vertical strip along the right end of the task card (<span class="status-chip-card__hex" style="background: #980100; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer;">#980100</span>), positioned with high priority at the top of the task list.</li>
+                <li><strong>Re-Opened Task:</strong> Re-Opened red animated marker (<span class="status-chip-card__hex" style="background: #db4437; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; cursor: pointer;">#DB4437</span>) alongside the rejection reason returned by the back office.</li>
+              </ul>
             </div>
           </div>
 
