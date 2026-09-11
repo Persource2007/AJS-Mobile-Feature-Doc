@@ -1283,7 +1283,7 @@ h3:hover .anchor-link {
 .workflow-infographic {
   position: relative;
   width: 100%;
-  max-width: 940px;
+  max-width: 900px;
   margin: var(--sp-6) auto var(--sp-8);
   user-select: none;
 }
@@ -1301,7 +1301,7 @@ h3:hover .anchor-link {
 .workflow-infographic__canvas {
   position: relative;
   display: grid;
-  grid-template-columns: 260px 1fr 260px;
+  grid-template-columns: 240px 1fr 240px;
   align-items: center;
   min-height: 420px;
   z-index: 2;
@@ -1481,6 +1481,23 @@ h3:hover .anchor-link {
     background var(--dur-fast) var(--ease);
   cursor: pointer;
   position: relative;
+}
+
+.hub-col--left .hub-node {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+.hub-col--left .hub-node__text {
+  align-items: flex-end;
+  text-align: right;
+}
+.hub-col--right .hub-node {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.hub-col--right .hub-node__text {
+  align-items: flex-start;
+  text-align: left;
 }
 
 .hub-node:focus-visible {
@@ -1701,7 +1718,9 @@ h3:hover .anchor-link {
     display: contents;
   }
 
-  .hub-node {
+  .hub-node,
+  .hub-col--left .hub-node,
+  .hub-col--right .hub-node {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     padding: var(--sp-4) var(--sp-3);
@@ -1709,6 +1728,13 @@ h3:hover .anchor-link {
     align-items: flex-start;
     gap: var(--sp-2);
     box-shadow: var(--shadow-1);
+  }
+
+  .hub-node__text,
+  .hub-col--left .hub-node__text,
+  .hub-col--right .hub-node__text {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .hub-node:hover {
@@ -1728,7 +1754,9 @@ h3:hover .anchor-link {
     grid-template-columns: 1fr;
   }
 
-  .hub-node {
+  .hub-node,
+  .hub-col--left .hub-node,
+  .hub-col--right .hub-node {
     flex-direction: row;
     align-items: center;
     gap: var(--sp-3);
@@ -1785,17 +1813,6 @@ h3:hover .anchor-link {
   }
 }
 
-.op-model-card__title {
-  font-family:
-    "Newsreader", "Playfair Display", "Charter", Georgia, "Times New Roman",
-    serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-text-primary);
-  margin: 0;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
 
 .op-model-card__badge {
   display: inline-flex;
@@ -1986,10 +2003,6 @@ h3:hover .anchor-link {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--sp-3);
-  }
-
-  .op-model-card__title {
-    font-size: 24px;
   }
 }
 
