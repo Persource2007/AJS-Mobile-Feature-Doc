@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/ic_app_logo.svg">
 </head>
 
 <body>
@@ -27,9 +28,12 @@
           <path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
         </svg>
       </button>
-      <a class="topbar__brand" href="#hero">
-        <span class="dot" aria-hidden="true"></span>
-        <span>AJS Mobile Handbook</span>
+      <a class="topbar__brand" href="#hero" aria-label="AJS Mobile Handbook">
+        <span class="topbar__brand-badge" aria-hidden="true">
+          <img src="assets/ic_app_logo.svg" alt="" class="brand-logo" width="28" height="17">
+        </span>
+        <span class="topbar__brand-name">AJS Mobile</span>
+        <span class="topbar__brand-sub">Handbook</span>
       </a>
       <div class="topbar__progress">
         <div class="topbar__progress-bar" id="reading-progress"></div>
@@ -54,7 +58,10 @@
 
     <nav class="sidebar" id="sidebar" aria-label="Handbook sections">
       <div class="sidebar__head">
-        <span class="sidebar__title">Contents</span>
+        <div class="sidebar__brand">
+          <img src="assets/ic_app_logo.svg" alt="" class="brand-logo" width="24" height="15" aria-hidden="true">
+          <span class="sidebar__title">Contents</span>
+        </div>
         <button class="icon-btn" id="mobile-nav-close" aria-label="Close navigation">
           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
@@ -83,6 +90,7 @@
             aria-controls="subnav-app-flow"><span class="num">03</span>Application Flow</a>
           <ul class="sidebar__sub" id="subnav-app-flow" aria-label="Application Flow topics">
             <li><a class="sidebar__sub-link" href="#flow-working-day">Working Day End-to-End</a></li>
+            <li><a class="sidebar__sub-link" href="#flow-functional-area">Flow by Functional Area</a></li>
             <li><a class="sidebar__sub-link" href="#flow-task-lifecycle">Task Lifecycle</a></li>
             <li><a class="sidebar__sub-link" href="#flow-certificate-lifecycle">Certificate Lifecycle</a></li>
             <li><a class="sidebar__sub-link" href="#flow-offline-sync">Offline &amp; Synchronisation</a></li>
@@ -98,61 +106,29 @@
           </ul>
         </li>
         <li class="sidebar__section">
-          <a class="sidebar__link" data-section="areas" href="#areas" aria-expanded="false"
-            aria-controls="subnav-areas"><span class="num">05</span>Functional Areas</a>
-          <ul class="sidebar__sub" id="subnav-areas" aria-label="Functional Area categories">
-            <li><a class="sidebar__sub-link" href="#area-access">Access &amp; Account</a></li>
-            <li><a class="sidebar__sub-link" href="#area-attendance">Attendance</a></li>
-            <li><a class="sidebar__sub-link" href="#area-overview">Work Overview</a></li>
-            <li><a class="sidebar__sub-link" href="#area-execution">Task Execution</a></li>
-            <li><a class="sidebar__sub-link" href="#area-accessfail">Access Failure Handling</a></li>
-            <li><a class="sidebar__sub-link" href="#area-assets">Assets</a></li>
-            <li><a class="sidebar__sub-link" href="#area-sors">Work Items (SORs)</a></li>
-            <li><a class="sidebar__sub-link" href="#area-thresholds">Spend Thresholds</a></li>
-            <li><a class="sidebar__sub-link" href="#area-certificates">Certificates</a></li>
-            <li><a class="sidebar__sub-link" href="#area-closure">Task Closure</a></li>
-            <li><a class="sidebar__sub-link" href="#area-timesheets">Timesheets</a></li>
-            <li><a class="sidebar__sub-link" href="#area-vanstock">Van Stock</a></li>
-            <li><a class="sidebar__sub-link" href="#area-media">Media</a></li>
-            <li><a class="sidebar__sub-link" href="#area-notifications">Notifications</a></li>
-            <li><a class="sidebar__sub-link" href="#area-sync">Offline &amp; Sync</a></li>
-            <li><a class="sidebar__sub-link" href="#area-profile">Profile</a></li>
-          </ul>
+          <a class="sidebar__link" data-section="areas" href="#areas"><span class="num">05</span>Functional Areas</a>
         </li>
         <li class="sidebar__section">
-          <a class="sidebar__link" data-section="features" href="#features" aria-expanded="false"
-            aria-controls="subnav-features"><span class="num">06</span>Features</a>
-          <ul class="sidebar__sub" id="subnav-features" aria-label="Feature groups">
-            <li><a class="sidebar__sub-link" href="#FEA-01">Access &amp; Account (FEA-01–08)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-09">Attendance (FEA-09)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-10">Work Overview (FEA-10–11)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-12">Task Execution (FEA-12–18)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-19">Access Failure (FEA-19)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-20">Assets (FEA-20–23)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-24">Work Items &amp; SORs (FEA-24)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-25">Spend Thresholds (FEA-25)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-26">Certificates Engine (FEA-26–28)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-29">Task Closure (FEA-29–32)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-33">Timesheets (FEA-33–34)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-35">Van Stock (FEA-35)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-36">Media &amp; Documents (FEA-36–37)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-38">Notifications (FEA-38)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-39">Offline &amp; Sync (FEA-39–40)</a></li>
-            <li><a class="sidebar__sub-link" href="#FEA-41">User Profile (FEA-41)</a></li>
-          </ul>
+          <a class="sidebar__link" data-section="features" href="#features"><span class="num">06</span>Features</a>
         </li>
         <li class="sidebar__section">
           <a class="sidebar__link" data-section="workflows" href="#workflows" aria-expanded="false"
             aria-controls="subnav-workflows"><span class="num">07</span>Key Workflows</a>
           <ul class="sidebar__sub" id="subnav-workflows" aria-label="Key Workflow topics">
-            <li><a class="sidebar__sub-link" href="#WF-01">WF-01: First Sign-In &amp; Load</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-04">WF-04: Start Working Day</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-05">WF-05: Travel to Site &amp; Arrive</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-06">WF-06: Safety Checks &amp; Start</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-10">WF-10: Assets, SORs &amp; Media</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-11">WF-11: Complete Certificate</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-14">WF-14: Review, Sign &amp; Close</a></li>
-            <li><a class="sidebar__sub-link" href="#WF-18">WF-18: Submit a Timesheet</a></li>
+            <li class="sidebar__sub-group is-open">
+              <a class="sidebar__sub-link" href="#workflows-connect" aria-expanded="true"
+                aria-controls="subnav-workflows-connect">How the Pieces Connect, End to End</a>
+              <ul class="sidebar__sub-sub" id="subnav-workflows-connect" aria-label="Connected workflow steps">
+                <li><a class="sidebar__sub-sub-link" href="#WF-01">WF-01: First Sign-In &amp; Load</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-04">WF-04: Start Working Day</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-05">WF-05: Travel to Site &amp; Arrive</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-06">WF-06: Safety Checks &amp; Start</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-10">WF-10: Assets, SORs &amp; Media</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-11">WF-11: Complete Certificate</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-14">WF-14: Review, Sign &amp; Close</a></li>
+                <li><a class="sidebar__sub-sub-link" href="#WF-18">WF-18: Submit a Timesheet</a></li>
+              </ul>
+            </li>
             <li><a class="sidebar__sub-link" href="#workflows-more">More Workflows Catalogue</a></li>
           </ul>
         </li>
@@ -235,7 +211,32 @@
           <div class="hero__bg" aria-hidden="true"></div>
           <div class="hero__grid">
             <div class="hero__copy">
-              <span class="hero__kicker">Product Handbook</span>
+              <div class="hero__header-row">
+                <span class="hero__kicker">
+                  <img src="assets/ic_app_logo.svg" alt="" class="brand-logo" width="22" height="14" aria-hidden="true">
+                  <span>Product Handbook</span>
+                </span>
+                <div class="hero__meta-strip">
+                  <span class="hero__meta-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <span>Version 1.0.0</span>
+                  </span>
+                  <span class="hero__meta-dot" aria-hidden="true">·</span>
+                  <span class="hero__meta-pill">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect width="18" height="18" x="3" y="4" rx="2.5"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                      <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                    </svg>
+                    <span><time datetime="2026-09-16">16 September 2026</time></span>
+                  </span>
+                </div>
+              </div>
               <h1 class="hero__title">AJS Mobile</h1>
               <p class="hero__lede">The field engineer's complete on-site working tool — for maintenance, inspection and
                 compliance visits across UK social-housing and commercial properties. Delivers the day's work, guides a
@@ -253,7 +254,8 @@
                   stroke="var(--color-border-strong)" stroke-width="2" />
                 <rect x="36" y="46" width="288" height="368" rx="10" class="hd-screen"
                   fill="var(--color-surface-sunken)" />
-                <rect x="52" y="66" width="180" height="14" rx="7" class="hd-bar" fill="var(--color-border)" />
+                <image href="assets/ic_app_logo.svg" x="52" y="63" width="28" height="17" aria-hidden="true" />
+                <rect x="88" y="67" width="144" height="10" rx="5" class="hd-bar" fill="var(--color-border)" />
                 <rect x="52" y="96" width="256" height="64" rx="12" class="hd-card" fill="var(--color-surface)"
                   stroke="var(--color-border)" />
                 <rect x="52" y="172" width="256" height="64" rx="12" class="hd-card" fill="var(--color-surface)"
@@ -785,7 +787,7 @@
           </div>
 
           <!-- ---------- FUNCTIONAL AREA FLOWS ---------- -->
-          <h3 class="h3 mt-7">Flow by functional area</h3>
+          <h3 class="h3 mt-7" id="flow-functional-area">Flow by functional area</h3>
           <p class="text-caption">The same map, one area at a time. Each card links to its full documentation.</p>
 
           <div class="farea-serpentine mt-5">
@@ -1925,7 +1927,7 @@
         <!-- ============================ FEATURES ============================ -->
         <section class="section" id="features">
           <p class="eyebrow">06 — Features</p>
-          <h2 class="h2">Forty-one features</h2>
+          <h2 class="h2">All features</h2>
           <p class="lede">Search or filter by area to find how a specific capability behaves. Tap a card to see the full
             picture — how it works, what's required, and what happens when something goes wrong.</p>
 
@@ -3630,7 +3632,7 @@
         <!-- =========================== WORKFLOWS ============================ -->
         <section class="section" id="workflows">
           <p class="eyebrow">07 — Key Workflows</p>
-          <h2 class="h2">How the pieces connect, end to end</h2>
+          <h2 class="h2" id="workflows-connect">How the pieces connect, end to end</h2>
           <p class="lede">Eight workflows shown in full below cover the spine of the working day. Twelve more are listed
             underneath in brief.</p>
 
@@ -7766,13 +7768,50 @@
         <!-- ============================= FOOTER ============================= -->
         <footer class="site-footer">
           <div class="divider" role="presentation"></div>
-          <p>This handbook describes AJS Mobile's functionality as observed in the application, cross-checked against a
-            sample of real working data and independently audited for accuracy. It reflects behaviour, not intent —
-            items marked <span class="pill-cond">Needs verification</span> are recorded as observed and require a
-            product-owner decision before being described as final.</p>
-          <div class="site-footer__meta">
-            <span>AJS Mobile Product Handbook</span>
-            <span>16 functional areas · 41 features · 34 screens · 20 workflows · 99 business rules</span>
+          <p>This handbook describes AJS Mobile's functionality as observed in the application, cross-checked against a sample of real working data and independently audited for accuracy. It reflects behaviour, not intent —
+ items marked <span class="pill-cond">Needs verification</span> are recorded as observed and require a product-owner decision before being described as final.</p>
+          <div class="site-footer__meta-block">
+            <div class="site-footer__brand">
+              <img src="assets/ic_app_logo.svg" alt="" class="brand-logo" width="28" height="17" aria-hidden="true">
+              <span class="site-footer__brand-title">AJS Mobile Product Handbook</span>
+            </div>
+
+            <div class="site-footer__meta-row">
+              <div class="site-footer__meta-item">
+                <div class="site-footer__icon-box site-footer__icon-box--version" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+                <div class="site-footer__meta-content">
+                  <span class="site-footer__meta-label">VERSION</span>
+                  <span class="site-footer__meta-val">1.0.0</span>
+                </div>
+              </div>
+
+              <div class="site-footer__meta-divider" role="presentation" aria-hidden="true"></div>
+
+              <div class="site-footer__meta-item">
+                <div class="site-footer__icon-box site-footer__icon-box--published" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="4" rx="2.5"/>
+                    <line x1="16" x2="16" y1="2" y2="6"/>
+                    <line x1="8" x2="8" y1="2" y2="6"/>
+                    <line x1="3" x2="21" y1="10" y2="10"/>
+                    <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                  </svg>
+                </div>
+                <div class="site-footer__meta-content">
+                  <span class="site-footer__meta-label">PUBLISHED</span>
+                  <span class="site-footer__meta-val"><time datetime="2026-09-16">16 September 2026</time></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="site-footer__bottom">
+            <p class="site-footer__copyright">&copy; 2026 Persource. All rights reserved.</p>
+            <p class="site-footer__standards">UK Housing Maintenance &amp; Compliance Specification</p>
           </div>
         </footer>
 

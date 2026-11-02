@@ -117,65 +117,72 @@
   /* ---------------- Active-section tracking + reading progress ---------------- */
   const SectionTracker = {
     init() {
-      this.sections = Array.from(document.querySelectorAll('.section[id]'));
       this.links = Array.from(document.querySelectorAll('.sidebar__link[data-section]'));
+      this.subLinks = Array.from(document.querySelectorAll('.sidebar__sub a[href^="#"], .sidebar__sub-sub a[href^="#"]'));
       this.progressBar = document.querySelector('.topbar__progress-bar');
-      if (!this.sections.length) return;
-
-      if ('IntersectionObserver' in window) {
-        this.observer = new IntersectionObserver(
-          (entries) => this.onIntersect(entries),
-          { rootMargin: '-15% 0px -70% 0px', threshold: 0 }
-        );
-        this.sections.forEach((s) => this.observer.observe(s));
-      }
-
-      this.subLinks = Array.from(document.querySelectorAll('.sidebar__sub a[href^="#"]'));
-      this.subTargets = this.subLinks
-        .map((a) => document.getElementById(a.getAttribute('href').slice(1)))
-        .filter(Boolean);
-
-      if ('IntersectionObserver' in window && this.subTargets.length) {
-        this.subObserver = new IntersectionObserver(
-          (entries) => {
-            if (isNavigating) return;
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                this.setActiveSub(entry.target.id);
-              }
-            });
-          },
-          { rootMargin: '-20% 0px -60% 0px', threshold: 0 }
-        );
-        this.subTargets.forEach((el) => this.subObserver.observe(el));
-      }
 
       window.addEventListener('scroll', () => this.updateProgress(), { passive: true });
       this.updateProgress();
 
-      // Intercept sidebar parent links for smooth coordinate scrolling with offset
+      // Intercept sidebar parent links: toggle expand/collapse only, DO NOT scroll content
       this.links.forEach((l) => {
         l.addEventListener('click', (e) => {
-          const href = l.getAttribute('href');
-          if (!href || !href.startsWith('#')) return;
-          const targetId = decodeURIComponent(href.slice(1));
-          const targetEl = document.getElementById(targetId);
-          if (!targetEl) return;
           e.preventDefault();
-          this.setActive(targetId);
-          navigateToTarget(targetEl, targetId);
+          const group = l.closest('.sidebar__section');
+          const hasSub = group && group.querySelector('.sidebar__sub');
+
+          // Toggle expand/collapse state
+          if (hasSub) {
+            const willOpen = !group.classList.contains('is-open');
+            group.classList.toggle('is-open', willOpen);
+            l.setAttribute('aria-expanded', String(willOpen));
+          } else {
+            const href = l.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              const targetId = decodeURIComponent(href.slice(1));
+              const targetEl = document.getElementById(targetId);
+              if (targetEl) {
+                this.setActive(targetId);
+                navigateToTarget(targetEl, targetId);
+              }
+            }
+          }
         });
       });
 
-      // Intercept sidebar sub-links for smooth coordinate scrolling with offset
+      // Intercept sidebar sub-links and sub-sub-links for smooth coordinate scrolling with offset
       this.subLinks.forEach((a) => {
         a.addEventListener('click', (e) => {
           const href = a.getAttribute('href');
+          const subGroup = a.closest('.sidebar__sub-group');
+          const hasSubSub = subGroup && a.getAttribute('aria-controls');
+
+          // If clicking a sub-group header (e.g. "How the Pieces Connect"), toggle its sub-sub accordion
+          if (hasSubSub) {
+            const willOpen = !subGroup.classList.contains('is-open');
+            subGroup.classList.toggle('is-open', willOpen);
+            a.setAttribute('aria-expanded', String(willOpen));
+          }
+
           if (!href || !href.startsWith('#')) return;
           const targetId = decodeURIComponent(href.slice(1));
           const targetEl = document.getElementById(targetId);
           if (!targetEl) return;
           e.preventDefault();
+
+          // Ensure parent section & sub-group stay open when an item is clicked
+          const group = a.closest('.sidebar__section');
+          if (group) {
+            group.classList.add('is-open');
+            const parentLink = group.querySelector('.sidebar__link');
+            if (parentLink) parentLink.setAttribute('aria-expanded', 'true');
+          }
+          if (subGroup) {
+            subGroup.classList.add('is-open');
+            const groupHeaderLink = subGroup.querySelector('.sidebar__sub-link');
+            if (groupHeaderLink) groupHeaderLink.setAttribute('aria-expanded', 'true');
+          }
+
           this.setActiveSub(targetId);
           navigateToTarget(targetEl, targetId);
         });
@@ -195,21 +202,48 @@
           });
         }
       });
-    },
-    onIntersect(entries) {
-      if (isNavigating) return;
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        this.setActive(entry.target.id);
-      });
+
+      // Initialize expanded section and active link from URL hash if present, or open first section by default
+      const initialHash = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : '';
+      if (initialHash) {
+        const activeSub = this.subLinks.find((a) => a.getAttribute('href') === '#' + initialHash);
+        const activeParent = this.links.find((l) => l.getAttribute('href') === '#' + initialHash || l.getAttribute('data-section') === initialHash);
+        if (activeSub) {
+          this.setActiveSub(initialHash);
+          const group = activeSub.closest('.sidebar__section');
+          if (group) {
+            group.classList.add('is-open');
+            const pLink = group.querySelector('.sidebar__link');
+            if (pLink) pLink.setAttribute('aria-expanded', 'true');
+          }
+        } else if (activeParent) {
+          this.setActive(initialHash);
+          const group = activeParent.closest('.sidebar__section');
+          if (group) {
+            group.classList.add('is-open');
+            activeParent.setAttribute('aria-expanded', 'true');
+          }
+        }
+      } else {
+        const firstSection = document.querySelector('.sidebar__section');
+        if (firstSection && firstSection.querySelector('.sidebar__sub')) {
+          firstSection.classList.add('is-open');
+          const pLink = firstSection.querySelector('.sidebar__link');
+          if (pLink) {
+            pLink.setAttribute('aria-expanded', 'true');
+            pLink.classList.add('is-active');
+          }
+        }
+      }
     },
     setActive(id) {
       this.links.forEach((l) => {
         const match = l.getAttribute('data-section') === id;
         l.classList.toggle('is-active', match);
-        l.setAttribute('aria-expanded', String(match));
-        const group = l.closest('.sidebar__section');
-        if (group) group.classList.toggle('is-active', match);
+      });
+      this.subLinks.forEach((a) => {
+        a.classList.remove('is-active');
+        a.removeAttribute('aria-current');
       });
     },
     setActiveSub(subId) {
@@ -224,7 +258,9 @@
             const parentLink = group.querySelector('.sidebar__link');
             if (parentLink) {
               const secId = parentLink.getAttribute('data-section');
-              if (secId) this.setActive(secId);
+              this.links.forEach((l) => {
+                l.classList.toggle('is-active', l.getAttribute('data-section') === secId);
+              });
             }
           }
         } else {
@@ -800,6 +836,88 @@
     }
   };
 
+  /* ---------------- Scroll Restoration on Refresh ---------------- */
+  function isPageReload() {
+    try {
+      const navEntries = performance.getEntriesByType('navigation');
+      if (navEntries && navEntries.length > 0) {
+        return navEntries[0].type === 'reload';
+      }
+      return performance.navigation && performance.navigation.type === 1;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const ScrollRestoration = {
+    posKey: 'ajs-handbook-scroll-pos',
+    pathKey: 'ajs-handbook-scroll-path',
+
+    init() {
+      if ('scrollRestoration' in history) {
+        try {
+          history.scrollRestoration = 'manual';
+        } catch (e) { }
+      }
+
+      let ticking = false;
+      const savePosition = () => {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        try {
+          sessionStorage.setItem(this.posKey, String(scrollY));
+          sessionStorage.setItem(this.pathKey, window.location.pathname + window.location.search);
+        } catch (e) { }
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            savePosition();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      window.addEventListener('beforeunload', savePosition);
+      window.addEventListener('pagehide', savePosition);
+
+      return this.restore();
+    },
+
+    restore() {
+      let savedY = null;
+      let savedPath = null;
+      try {
+        savedY = sessionStorage.getItem(this.posKey);
+        savedPath = sessionStorage.getItem(this.pathKey);
+      } catch (e) { }
+
+      const currentPath = window.location.pathname + window.location.search;
+      const isReload = isPageReload();
+
+      if (savedY !== null && savedPath === currentPath) {
+        const targetY = parseInt(savedY, 10);
+        if (!isNaN(targetY) && targetY >= 0) {
+          if (isReload || !window.location.hash) {
+            const doScroll = () => {
+              window.scrollTo({ top: targetY, behavior: 'auto' });
+            };
+
+            doScroll();
+            window.requestAnimationFrame(doScroll);
+            setTimeout(doScroll, 50);
+            setTimeout(doScroll, 180);
+
+            window.addEventListener('load', doScroll, { once: true });
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+  };
+
   /* ---------------- Init ---------------- */
   document.addEventListener('DOMContentLoaded', () => {
     Theme.init();
@@ -885,7 +1003,9 @@
       noun: { singular: 'screen', plural: 'screens' }
     });
 
-    if (window.location.hash) {
+    const restoredScroll = ScrollRestoration.init();
+
+    if (window.location.hash && !restoredScroll) {
       setTimeout(() => {
         revealDeepLink(true);
       }, 100);
